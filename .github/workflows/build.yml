@@ -1,0 +1,35 @@
+name: Build
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  windows:
+    name: Windows exe
+    runs-on: windows-latest
+
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+
+      - name: Build with MSVC
+        shell: pwsh
+        run: |
+          $vswhere = Join-Path ${env:ProgramFiles(x86)} "Microsoft Visual Studio\Installer\vswhere.exe"
+          $install = & $vswhere -latest -products * -requires Microsoft.VisualStudio.Component.VC.Tools.x86.x64 -property installationPath
+          if (-not $install) {
+            throw "Visual Studio C++ tools were not found."
+          }
+
+          $vcvars = Join-Path $install "VC\Auxiliary\Build\vcvars32.bat"
+          $command = "`"$vcvars`" && cl /nologo /O2 /W4 /D_CRT_SECURE_NO_WARNINGS thcrap_menu.c /link /SUBSYSTEM:WINDOWS user32.lib gdi32.lib shell32.lib /OUT:thcrap_menu.exe"
+          cmd.exe /d /s /c $command
+
+      - name: Upload exe artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: thcrap_menu-windows-x86
+          path: thcrap_menu.exe
+
