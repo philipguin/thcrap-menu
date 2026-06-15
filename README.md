@@ -2,11 +2,13 @@
 
 A tiny Windows menu for [thcrap](https://github.com/thpatch/thcrap).
 
+![thcrap-menu launcher screenshot](docs/screenshot.png)
+
 Instead of making a separate shortcut for every thcrap config, make one
 shortcut for a game. When you launch it, this menu lets you pick which config
 to use with the mouse, keyboard, or controller.
 
-It was made with Steam Deck / Proton in mind, but it also works as a normal
+This was made with Steam Deck / Proton in mind, but it also works as a normal
 Windows program.
 
 
