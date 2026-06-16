@@ -1,6 +1,7 @@
 # thcrap-menu
 
-A tiny Windows menu for [thcrap](https://github.com/thpatch/thcrap).
+A tiny Windows menu for [thcrap](https://github.com/thpatch/thcrap) with
+controller support.
 
 ![thcrap-menu launcher screenshot](docs/screenshot.png)
 
